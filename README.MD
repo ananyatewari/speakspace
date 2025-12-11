@@ -1,8 +1,8 @@
-🚀 SpeakSpace Assisted Backend Workflow: Voice-to-Blog Automation
+# 🚀 SpeakSpace Assisted Backend Workflow: Voice-to-Blog Automation
 
 Transform voice notes into AI-generated blog posts — fully automated, production-ready workflow.
 
-📌 Overview
+# 📌 Overview
 
 This project is a custom workflow module built for the SpeakSpace app.
 When a user selects their custom action inside the SpeakSpace app:
@@ -19,9 +19,7 @@ Workflow logs are stored in MongoDB
 
 (Optional) Blog post can be published to WordPress
 
-Your API responds immediately while processing continues in the background — exactly as required by SpeakSpace’s workflow execution model.
-
-🎯 Features
+# 🎯 Features
 
 🔐 Secure API (x-api-key token authentication)
 
@@ -37,7 +35,7 @@ Your API responds immediately while processing continues in the background — e
 
 🛠 Clean environment-variable-based configuration
 
-🧠 Architecture Flow
+## 🧠 Architecture Flow
 SpeakSpace App → Sends {prompt, note_id, timestamp}  
       ↓  
 This Backend (Render)  
@@ -50,20 +48,20 @@ This Backend (Render)
       ↓  
 MongoDB stores complete workflow history  
 
-📩 Example Incoming Payload (From SpeakSpace)
+### 📩 Example Incoming Payload (From SpeakSpace)
 {
   "prompt": "Publish Blog Post\n\n### Introduction\nHello, Hi",
   "note_id": "user_note_8482",
   "timestamp": "2025-12-10T18:04:32Z"
 }
 
-📤 Required API Response
+### 📤 Required API Response
 { "status": "success" }
 
 
 SpeakSpace does not require large or detailed responses — minimal output is preferred.
 
-🗄 MongoDB Workflow Log Example
+### 🗄 MongoDB Workflow Log Example
 {
   "_id": "693b1d47242762220be5d1c2",
   "note_id": "user_note_8482",
@@ -80,50 +78,46 @@ SpeakSpace does not require large or detailed responses — minimal output is pr
   }
 }
 
-🛠 Tech Stack
+## 🛠 Tech Stack
 Component	Technology
 Backend	Node.js + Express
 AI Model	Groq Llama 3 (free tier)
 Database	MongoDB Atlas
 Deployment	Render
 
-🚀 Getting Started (Local Setup)
+# 🚀 Getting Started (Local Setup)
 
-1️⃣ Install dependencies
+## 1️⃣ Install dependencies
 npm install
 
-2️⃣ Create .env file
+## 2️⃣ Create .env file
 
 Use the template below.
 
 🔐 Environment Variables
 
-Create a .env file using this structure:
+### Create a .env file using this structure:
 
-# SpeakSpace Shared Key
 SPEAKSPACE_SHARED_KEY=your_shared_key_here
 
-# MongoDB
 MONGO_URI=your_mongo_uri_here
 
-# Groq AI
 GROQ_API_KEY=your_groq_api_key_here
 
-# Optional WordPress Integration
 WP_BASE_URL=
 WP_USER=
 WP_APP_PASSWORD=
 
-3️⃣ Start backend
+## 3️⃣ Start backend
 npm run dev
 
-🌍 Deployment (Render)
+## 🌍 Deployment (Render)
 
 https://speakspace-amfe.onrender.com/api/process
 
 Please use this URL when configuring SpeakSpace actions
 
-🔧 SpeakSpace Custom Action Configuration for quick workflow testing 
+## 🔧 SpeakSpace Custom Action Configuration for quick workflow testing 
 
 Name: Publish Blog Post
 Description: Converts a user voice note into a structured blog post using AI.
@@ -139,7 +133,7 @@ Headers:
   Key: x-api-key
   Value: your_secret_here
 
-📁 Project Structure (when building locally)
+## 📁 Project Structure (when building locally)
 /server
   /routes
     process.js
@@ -152,11 +146,11 @@ Headers:
   .env (need to create exclusively)
   README.md
 
-Expected result:
+## Expected result:
 
 {"status":"success"}
 
-🏁 Final Notes
+## 🏁 Final Notes
 
 This project demonstrates:
 
