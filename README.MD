@@ -95,15 +95,12 @@ Deployment	Render
 
 # 🚀 Getting Started (Local Setup)
 
-## 1️⃣ Install dependencies
+### 1️⃣ Install dependencies
 npm install
 
-## 2️⃣ Create .env file
+### 2️⃣ Create .env file
 
 Use the template below.
-
-
-## Create a .env file using this structure:
 
 ```
 SPEAKSPACE_SHARED_KEY=your_shared_key_here
@@ -117,7 +114,7 @@ WP_USER=
 WP_APP_PASSWORD=
 ```
 
-## 3️⃣ Start backend
+### 3️⃣ Start backend
 npm run dev
 
 ## 🌍 Deployment (Render)
