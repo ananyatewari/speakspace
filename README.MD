@@ -49,19 +49,26 @@ This Backend (Render)
 MongoDB stores complete workflow history  
 
 ### 📩 Example Incoming Payload (From SpeakSpace)
+
+```
 {
   "prompt": "Publish Blog Post\n\n### Introduction\nHello, Hi",
   "note_id": "user_note_8482",
   "timestamp": "2025-12-10T18:04:32Z"
 }
+```
 
 ### 📤 Required API Response
-{ "status": "success" }
 
+```
+{ "status": "success" }
+```
 
 SpeakSpace does not require large or detailed responses — minimal output is preferred.
 
 ### 🗄 MongoDB Workflow Log Example
+
+```
 {
   "_id": "693b1d47242762220be5d1c2",
   "note_id": "user_note_8482",
@@ -77,6 +84,7 @@ SpeakSpace does not require large or detailed responses — minimal output is pr
     }
   }
 }
+```
 
 ## 🛠 Tech Stack
 Component	Technology
