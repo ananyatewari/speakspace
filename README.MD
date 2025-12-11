@@ -37,17 +37,19 @@ Workflow logs are stored in MongoDB
 
 ## 🧠 Architecture Flow
 
-> SpeakSpace App → Sends {prompt, description, etc}  
->         ↓  
-> This Backend (Render)  
->       - Validates API key  
->       - Stores workflow log  
->       - Returns immediate success  
->       - Runs AI generation in background  
->       - Stores generated output in DB  
->       - Publishes to WordPress  
->         ↓  
-> MongoDB stores complete workflow history  
+```
+ SpeakSpace App → Sends {prompt, description, etc}  
+         ↓  
+ This Backend (Render)  
+       - Validates API key  
+       - Stores workflow log  
+       - Returns immediate success  
+       - Runs AI generation in background  
+       - Stores generated output in DB  
+       - Publishes to WordPress  
+         ↓  
+ MongoDB stores complete workflow history  
+```
 
 ### 📩 Example Incoming Payload (From SpeakSpace)
 
