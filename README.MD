@@ -7,17 +7,17 @@ Transform voice notes into AI-generated blog posts — fully automated, producti
 This project is a custom workflow module built for the SpeakSpace app.
 When a user selects their custom action inside the SpeakSpace app:
 
-The user picks a voice note
+- The user picks a voice note
 
-SpeakSpace processes intent → builds the final prompt
+- SpeakSpace processes intent → builds the final prompt
 
-SpeakSpace POSTs the workflow payload to the backend
+- SpeakSpace POSTs the workflow payload to the backend
 
-The backend generates content using AI
+- The backend generates content using AI
 
-Workflow logs are stored in MongoDB
+- Workflow logs are stored in MongoDB
 
-(Optional) Blog post can be published to WordPress
+- (Optional) Blog post can be published to WordPress
 
 # 🎯 Features
 
