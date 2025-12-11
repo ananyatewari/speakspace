@@ -8,16 +8,16 @@ const router = express.Router();
 router.use((req, res, next) => {
   console.log("🔐 Incoming headers:", req.headers);
 
+  const expected = process.env.SPEAKSPACE_SHARED_KEY;
   const apiKey = req.headers["x-api-key"];
   const authHeader = req.headers["authorization"];
-  const expected = process.env.SPEAKSPACE_SHARED_KEY;
 
-  if (apiKey && apiKey === expected) {
+  if (apiKey === expected) {
     console.log("✔ Authenticated via x-api-key");
     return next();
   }
 
-  if (authHeader && authHeader.startsWith("Bearer ")) {
+  if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.split(" ")[1];
     if (token === expected) {
       console.log("✔ Authenticated via Bearer token");
@@ -25,56 +25,60 @@ router.use((req, res, next) => {
     }
   }
 
-  console.log("❌ AUTH FAILED. Expected:", expected);
+  console.log("❌ AUTH FAILED. Expected key:", expected);
   return res.status(401).json({ status: "error", message: "Unauthorized" });
 });
-
 
 router.post("/", async (req, res) => {
   try {
     console.log("📩 Incoming SpeakSpace Payload:", req.body);
 
-    const { prompt, note_id, timestamp, title = "Untitled Post" } = req.body;
+    const { prompt, title = "Untitled Post" } = req.body;
 
-    if (!prompt || !note_id) {
-      console.log("❌ Missing fields");
+    if (!prompt) {
+      console.log("❌ Missing prompt");
       return res.status(400).json({
         status: "error",
-        message: "Missing required fields: prompt, note_id",
+        message: "Missing required field: prompt",
       });
     }
 
+    const safeNoteId = `note-${Date.now()}`;
+    const safeTimestamp = new Date().toISOString();
+
     const log = await RequestLog.create({
-      note_id,
-      timestamp,
+      note_id: safeNoteId,
+      timestamp: safeTimestamp,
       prompt,
       action: "speakspace_workflow",
-      status: "processing"
+      status: "processing",
     });
 
     console.log("🗂 DB Entry Created:", log._id);
 
-    console.log("📤 Responding to SpeakSpace...");
     res.json({ status: "success" });
+    console.log("📤 Responded to SpeakSpace");
 
     console.log("🤖 Running AI generation...");
     const generated = await generateContent(prompt);
 
-    console.log("📝 Generated Minimal Content:", generated.substring(0, 200));
+    console.log("📝 Minimal Generated Output:", generated.substring(0, 150));
 
-    console.log("🌐 Attempting WordPress publish...");
-    const wpResult = await publishToWordPress({
-      title,
-      htmlContent: generated
-    });
+    let wpResult = { status: "skipped", message: "WP not configured" };
+
+    try {
+      wpResult = await publishToWordPress({
+        title,
+        htmlContent: generated,
+      });
+    } catch (wpErr) {
+      console.log("⚠ WordPress publish failed:", wpErr.message);
+    }
 
     log.status = "done";
-    log.result = {
-      generated,
-      wordpress: wpResult || { status: "skipped", message: "WP not configured" }
-    };
-
+    log.result = { generated, wordpress: wpResult };
     await log.save();
+
     console.log("✅ Workflow updated in DB");
 
   } catch (err) {
