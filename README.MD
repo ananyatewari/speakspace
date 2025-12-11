@@ -138,30 +138,25 @@ $PROMPT
 Notes Selector: Any note
 
 API URL: https://speakspace-amfe.onrender.com/api/process
-Headers:
-  Key: x-api-key
-  Value: your_secret_here
 
-## 📁 Project Structure (when building locally)
-/server
-  /routes
-    process.js
-  /models
-    RequestLog.js
-  /services
-    groq.js
-    wordpressAdapter.js
-  server.js
-  .env (need to create exclusively)
-  README.md
+Headers:
+
+  Key: x-api-key
+
+  Value: your_secret_here
 
 ## 🏁 Final Notes
 
 This project demonstrates:
 
 ✔ Real workflow automation
+
 ✔ Real-time processing
+
 ✔ Proper SpeakSpace integration
+
 ✔ Clean code
+
 ✔ Scalable backend
+
 ✔ Database logging for audits
