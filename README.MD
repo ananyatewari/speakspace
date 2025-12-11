@@ -2,62 +2,60 @@
 
 Transform voice notes into AI-generated blog posts — fully automated, production-ready workflow.
 
+---
+
 # 📌 Overview
 
-This project is a custom workflow module built for the SpeakSpace app.
+This project is a **custom workflow module** built for the SpeakSpace app.
+
 When a user selects their custom action inside the SpeakSpace app:
 
-The user picks a voice note
+✨ **Workflow Steps**
+- 🎤 The user picks a voice note  
+- 🧠 SpeakSpace processes intent → builds the final prompt  
+- 📤 SpeakSpace POSTs the workflow payload to the backend  
+- 🤖 The backend generates content using AI  
+- 🗂 Workflow logs are stored in MongoDB  
+- 🌐 *(Optional)* Blog post can be published to WordPress  
 
-SpeakSpace processes intent → builds the final prompt
-
-SpeakSpace POSTs the workflow payload to the backend
-
-The backend generates content using AI
-
-Workflow logs are stored in MongoDB
-
-(Optional) Blog post can be published to WordPress
+---
 
 # 🎯 Features
 
-🔐 Secure API (x-api-key token authentication)
+- 🔐 **Secure API** (<span style="color:#ff4f4f">x-api-key authentication</span>)
+- ⚡ **Instant response** to SpeakSpace → `{ "status": "success" }`
+- 🤖 **AI-generated blog content using Groq Llama 3**
+- 🗂 **Workflow execution logs saved in MongoDB**
+- 🌐 **Optional WordPress publishing integration**
+- 📡 **Fully deployed backend on Render**
+- 🛠 **Clean, environment-variable-based configuration**
 
-⚡ Instant response to SpeakSpace ({ "status": "success" })
-
-🤖 AI-generated blog content using Groq Llama 3
-
-🗂 Workflow execution logs saved in MongoDB
-
-🌐 Optional WordPress publishing integration (can add custom user, password while running in local)
-
-📡 Fully deployed backend on Render
-
-🛠 Clean environment-variable-based configuration
+---
 
 ## 🧠 Architecture Flow
 
-> SpeakSpace App → Sends {prompt, note_id, timestamp}  
->         ↓  
-> This Backend (Render)  
->       - Validates API key  
->       - Stores workflow log  
->       - Returns immediate success  
->       - Runs AI generation in background  
->       - Stores generated output in DB  
->       - Publishes to WordPress  
->         ↓  
-> MongoDB stores complete workflow history  
+> SpeakSpace App → Sends {prompt, description, etc}  
+> &nbsp;&nbsp;&nbsp;&nbsp;⬇️  
+> **Backend (Render)**  
+> &nbsp;&nbsp;&nbsp;&nbsp;- <span style="color:#4caf50">Validates API key</span>  
+> &nbsp;&nbsp;&nbsp;&nbsp;- <span style="color:#4caf50">Stores workflow log</span>  
+> &nbsp;&nbsp;&nbsp;&nbsp;- <span style="color:#4caf50">Returns immediate success</span>  
+> &nbsp;&nbsp;&nbsp;&nbsp;- <span style="color:#4caf50">Runs AI generation in background</span>  
+> &nbsp;&nbsp;&nbsp;&nbsp;- <span style="color:#4caf50">Stores generated output in DB</span>  
+> &nbsp;&nbsp;&nbsp;&nbsp;- <span style="color:#4caf50">Publishes to WordPress</span>  
+> &nbsp;&nbsp;&nbsp;&nbsp;⬇️  
+> **MongoDB stores complete workflow history**
+
+---
 
 ### 📩 Example Incoming Payload (From SpeakSpace)
 
-```
+```json
 {
   "prompt": "Publish Blog Post\n\n### Introduction\nHello, Hi",
   "note_id": "user_note_8482",
   "timestamp": "2025-12-10T18:04:32Z"
 }
-```
 
 ### 📤 Required API Response
 
@@ -88,11 +86,14 @@ SpeakSpace does not require large or detailed responses — minimal output is pr
 ```
 
 ## 🛠 Tech Stack
-Component	Technology
-Backend	Node.js + Express
-AI Model	Groq Llama 3 (free tier)
-Database	MongoDB Atlas
-Deployment	Render
+
+| Component                                                       | Technology               |
+| --------------------------------------------------------------- | ------------------------ |
+| <span style="color:#4caf50;font-weight:bold;">Backend</span>    | Node.js + Express        |
+| <span style="color:#4caf50;font-weight:bold;">AI Model</span>   | Groq Llama 3 (free tier) |
+| <span style="color:#4caf50;font-weight:bold;">Database</span>   | MongoDB Atlas            |
+| <span style="color:#4caf50;font-weight:bold;">Deployment</span> | Render                   |
+
 
 # 🚀 Getting Started (Local Setup)
 
@@ -104,7 +105,7 @@ npm install
 Use the template below.
 
 
-## Create a .env file using this structure:
+## <span style="color:#00bcd4;font-weight:bold;">Create a .env file using this structure:</span>
 
 ```
 SPEAKSPACE_SHARED_KEY=your_shared_key_here
@@ -123,7 +124,8 @@ npm run dev
 
 ## 🌍 Deployment (Render)
 
-https://speakspace-amfe.onrender.com/api/process
+<span style="color:#ff9800;font-weight:bold;">https://speakspace-amfe.onrender.com/api/process
+</span>
 
 Please use this URL when configuring SpeakSpace actions
 
@@ -138,7 +140,7 @@ $PROMPT
 
 Notes Selector: Any note
 
-API URL: https://your-server/api/process
+API URL: https://speakspace-amfe.onrender.com/api/process
 Headers:
   Key: x-api-key
   Value: your_secret_here
@@ -160,9 +162,9 @@ Headers:
 
 This project demonstrates:
 
-✔ Real workflow automation
-✔ Real-time processing
-✔ Proper SpeakSpace integration
-✔ Clean code
-✔ Scalable backend
-✔ Database logging for audits
+✔ <span style="color:#4caf50;">Real workflow automation</span>
+✔ <span style="color:#4caf50;">Real-time processing</span>
+✔ <span style="color:#4caf50;">Proper SpeakSpace integration</span>
+✔ <span style="color:#4caf50;">Clean code</span>
+✔ <span style="color:#4caf50;">Scalable backend</span>
+✔ <span style="color:#4caf50;">Database logging for audits</span>
