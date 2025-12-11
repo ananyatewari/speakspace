@@ -36,17 +36,18 @@ Workflow logs are stored in MongoDB
 🛠 Clean environment-variable-based configuration
 
 ## 🧠 Architecture Flow
-SpeakSpace App → Sends {prompt, note_id, timestamp}  
-      ↓  
-This Backend (Render)  
-      - Validates API key  
-      - Stores workflow log  
-      - Returns immediate success  
-      - Runs AI generation in background  
-      - Stores generated output in DB  
-      - Publishes to WordPress  
-      ↓  
-MongoDB stores complete workflow history  
+
+> SpeakSpace App → Sends {prompt, note_id, timestamp}  
+>         ↓  
+> This Backend (Render)  
+>       - Validates API key  
+>       - Stores workflow log  
+>       - Returns immediate success  
+>       - Runs AI generation in background  
+>       - Stores generated output in DB  
+>       - Publishes to WordPress  
+>         ↓  
+> MongoDB stores complete workflow history  
 
 ### 📩 Example Incoming Payload (From SpeakSpace)
 
@@ -102,10 +103,10 @@ npm install
 
 Use the template below.
 
-🔐 Environment Variables
 
-### Create a .env file using this structure:
+## Create a .env file using this structure:
 
+```
 SPEAKSPACE_SHARED_KEY=your_shared_key_here
 
 MONGO_URI=your_mongo_uri_here
@@ -115,6 +116,7 @@ GROQ_API_KEY=your_groq_api_key_here
 WP_BASE_URL=
 WP_USER=
 WP_APP_PASSWORD=
+```
 
 ## 3️⃣ Start backend
 npm run dev
@@ -153,10 +155,6 @@ Headers:
   server.js
   .env (need to create exclusively)
   README.md
-
-## Expected result:
-
-{"status":"success"}
 
 ## 🏁 Final Notes
 
